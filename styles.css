@@ -798,6 +798,19 @@ img {
 .footer-brand .nav-logo {
   margin-bottom: 1rem;
   display: inline-block;
+  color: var(--white);
+}
+
+.footer-brand .nav-logo span {
+  color: var(--pink-light);
+}
+
+.footer-brand .nav-logo:hover {
+  color: var(--pink-light);
+}
+
+.footer-brand .nav-logo:hover span {
+  color: var(--white);
 }
 
 .footer-brand p {
