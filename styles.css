@@ -553,7 +553,7 @@ img {
 .about-image {
   border-radius: 16px;
   overflow: hidden;
-  aspect-ratio: 4/5;
+  aspect-ratio: 2/3;
   background: var(--cream-dark);
   display: flex;
   align-items: center;
