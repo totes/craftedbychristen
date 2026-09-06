@@ -132,20 +132,111 @@ img {
 
 .nav-toggle {
   display: none;
-  flex-direction: column;
-  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
   cursor: pointer;
   background: none;
   border: none;
-  padding: 0.5rem;
+  padding: 0;
+  position: relative;
+  z-index: 110;
 }
 
 .nav-toggle span {
   display: block;
-  width: 24px;
+  width: 22px;
   height: 2px;
   background: var(--green);
-  transition: all 0.3s ease;
+  position: absolute;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-toggle span:nth-child(1) {
+  transform: translateY(-7px);
+}
+
+.nav-toggle span:nth-child(3) {
+  transform: translateY(7px);
+}
+
+.nav-toggle.open span:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+.nav-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.open span:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+/* ── Mobile Menu Panel ── */
+
+.mobile-menu {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  background: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  clip-path: inset(0 0 100% 0);
+  visibility: hidden;
+  transition: clip-path 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+              visibility 0.45s;
+}
+
+.mobile-menu.open {
+  clip-path: inset(0 0 0 0);
+  visibility: visible;
+}
+
+.mobile-menu-links {
+  list-style: none;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-menu-links li {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-menu.open .mobile-menu-links li {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobile-menu.open .mobile-menu-links li:nth-child(1) { transition-delay: 0.12s; }
+.mobile-menu.open .mobile-menu-links li:nth-child(2) { transition-delay: 0.2s; }
+.mobile-menu.open .mobile-menu-links li:nth-child(3) { transition-delay: 0.28s; }
+.mobile-menu.open .mobile-menu-links li:nth-child(4) { transition-delay: 0.36s; }
+.mobile-menu.open .mobile-menu-links li:nth-child(5) { transition-delay: 0.44s; }
+
+.mobile-menu-links a {
+  font-family: 'Great Vibes', 'Elegant Script', cursive;
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: var(--text-light);
+  letter-spacing: 0.02em;
+  display: block;
+  padding: 0.75rem 0;
+  transition: color 0.3s ease;
+}
+
+.mobile-menu-links a:hover,
+.mobile-menu-links a.active {
+  color: var(--green);
 }
 
 /* ── Hero Section ── */
@@ -882,20 +973,6 @@ img {
 @media (max-width: 768px) {
   .nav-links {
     display: none;
-    position: absolute;
-    top: 80px;
-    left: 0;
-    right: 0;
-    background: var(--cream);
-    flex-direction: column;
-    padding: 2rem;
-    gap: 1rem;
-    border-bottom: 1px solid var(--cream-dark);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  }
-
-  .nav-links.open {
-    display: flex;
   }
 
   .nav-toggle {

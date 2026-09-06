@@ -27,6 +27,16 @@
     </div>
   </nav>
 
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-menu-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="teaching.html">Teaching</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+
   <section class="hero">
     <div class="hero-content">
       <p class="hero-subtitle">Artist & Talented Art Teacher</p>
@@ -112,14 +122,29 @@
   <script>
     const nav = document.getElementById('nav');
     const navToggle = document.getElementById('navToggle');
-    const navLinks = document.getElementById('navLinks');
+    const mobileMenu = document.getElementById('mobileMenu');
 
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    navToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
+    function toggleMenu() {
+      const opening = !mobileMenu.classList.contains('open');
+      navToggle.classList.toggle('open', opening);
+      mobileMenu.classList.toggle('open', opening);
+      document.body.style.overflow = opening ? 'hidden' : '';
+    }
+
+    navToggle.addEventListener('click', toggleMenu);
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (mobileMenu.classList.contains('open')) toggleMenu();
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) toggleMenu();
     });
   </script>
 
